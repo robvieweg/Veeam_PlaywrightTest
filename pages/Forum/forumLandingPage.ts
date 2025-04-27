@@ -20,5 +20,4 @@ export class ForumPage {
             const registerButton = this.page.locator(this.registerButton)
             await registerButton.click()
       }
-
 }
