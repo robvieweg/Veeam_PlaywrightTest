@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 
 export class LandingPageWeb {
       readonly page: Page;
@@ -6,7 +6,6 @@ export class LandingPageWeb {
       readonly rdForumsLink: string;
       readonly supportLink: string;
       readonly solutionsLink: string;
-
 
       constructor(page: Page) {
             this.page = page;
@@ -21,8 +20,7 @@ export class LandingPageWeb {
       }
 
       async openRdForums() {
-            await this.page.locator(this.rdForumsLink).isVisible()
-            await this.page.locator(this.rdForumsLink).click()
+            await this.page.locator(this.rdForumsLink).isVisible();
+            await this.page.locator(this.rdForumsLink).click();
       }
-
 }

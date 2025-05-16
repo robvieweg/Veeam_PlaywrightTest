@@ -3,25 +3,28 @@ import { LandingPageWeb } from '../pages/Web/landingPageWeb';
 import { ForumPage } from '../pages/Forum/forumLandingPage';
 import { ForumRegistration } from '../pages/Forum/forumRegistrationPage';
 
-test.beforeEach(async ({ browser, page }) => {
+test.beforeEach(async ({ context, page }) => {
+      await context.clearCookies();
+
       const landingPageWeb = new LandingPageWeb(page);
       await page.goto(landingPageWeb.landingPageLink, {
             waitUntil: 'load',
       });
 });
 
-test('Test - invalid e-mail domain registration - R&D Forums', async ({ browser, page }) => {
+test('Test - invalid e-mail domain registration - R&D Forums', async ({ page }) => {
       const landingPageWeb = new LandingPageWeb(page);
       await landingPageWeb.openSupportLink();
       await landingPageWeb.openRdForums();
-      
-      const forumPage = new ForumPage(page)
+
+      const forumPage = new ForumPage(page);
       await forumPage.checkForumUrl();
       await forumPage.registerUser();
-      
+
       const forumRegistration = new ForumRegistration(page);
       await forumRegistration.agreeRegistrationTerms();
       await forumRegistration.fillRegistrationDetails();
       await forumRegistration.submitRegistration();
-      await forumRegistration.checkPublicEmailDomainError();
+
+      expect(await forumRegistration.checkPublicEmailDomainError()).toBe(true);
 });

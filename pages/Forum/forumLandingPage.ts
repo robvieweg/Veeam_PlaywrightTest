@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { expect, type Page } from '@playwright/test';
 
 export class ForumPage {
       readonly page: Page;
@@ -17,7 +17,7 @@ export class ForumPage {
       }
 
       async registerUser() {
-            const registerButton = this.page.locator(this.registerButton)
-            await registerButton.click()
+            const registerButton = this.page.locator(this.registerButton);
+            await registerButton.click();
       }
 }
